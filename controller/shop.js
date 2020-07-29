@@ -220,7 +220,6 @@ exports.deleteAddress = (req, res, next) => {
                 }
             }
             loadedUser.addresses = addresses;
-            //loadedUser = loadedUser.addresses.pull(id);
             return loadedUser.save();
         })
         .then((result) => {

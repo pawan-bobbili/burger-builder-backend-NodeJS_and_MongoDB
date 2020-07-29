@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 
 const User = require("../model/user");
+const keys = require("../apikeys");
 
 exports.signup = (req, res, next) => {
     let errors = validationResult(req);
@@ -71,7 +72,7 @@ exports.signin = (req, res, next) => {
                 error.message = ["Invalid Password"];
                 throw error;
             }
-            const token = jwt.sign({ userId: loadeduser._id }, "Karnal@18", {
+            const token = jwt.sign({ userId: loadeduser._id }, keys.jwtSecret, {
                 expiresIn: "1h",
             });
             res.status(200).json({

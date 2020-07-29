@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const adminRoutes = require("./routes/admin");
 const authRoutes = require("./routes/auth");
 const shopRoutes = require("./routes/shop");
+const keys = require("./apikeys");
 
 const app = express();
 
@@ -43,9 +44,7 @@ app.use((err, req, res, next) => {
 });
 
 mongoose
-    .connect(
-        "mongodb+srv://node-user:Karnal18@cluster0-sgm7m.mongodb.net/burger?retryWrites=true&w=majority"
-    )
+    .connect(keys.mongoURI)
     .then((result) => {
         app.listen(8080);
         console.log("Backend Established");

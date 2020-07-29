@@ -1,6 +1,8 @@
 const { body } = require("express-validator");
 const jwt = require("jsonwebtoken");
+
 const User = require("../model/user");
+const keys = require("../apikeys");
 
 exports.tokenValidator = (req, res, next) => {
     let token = req.get("token");
@@ -14,7 +16,7 @@ exports.tokenValidator = (req, res, next) => {
     const userId = req.get("userId");
     let decodedToken;
     try {
-        decodedToken = jwt.decode(token, "Karnal@18");
+        decodedToken = jwt.decode(token, keys.jwtSecret);
     } catch (err) {
         if (!err.statusCode && !err.status && !err.statuscode) {
             err.statusCode = 500;
